@@ -1,12 +1,19 @@
-# Install the latest version of Redis (v5.0.1 as of June 2024)
-!pip install -U redis
+# Install specific Redis version known to work with LangChain (v4.5.1)
+!pip install redis==4.5.1
 
 # Install LangChain and other required packages
-!pip install -q langchain-community langchain-core unstructured langchain_openai
+!pip install -q langchain-community==0.0.10 langchain-core==0.1.5 unstructured langchain_openai==0.0.2
 
 # Print Redis version for debugging
 import redis
 print(f"Redis version: {redis.__version__}")
+
+# Check if Redis search module is available
+try:
+    from redis.commands.search.indexDefinition import IndexDefinition
+    print("Redis search module is available")
+except ImportError:
+    print("Redis search module is NOT available")
 
 # Add a small delay to ensure installation completes
 import time
